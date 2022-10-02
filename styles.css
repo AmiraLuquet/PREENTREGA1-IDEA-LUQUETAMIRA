@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    background-color: bisque;
+}
+.ofertas{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+    align-items: center;
+}
+.ofertas h1{
+    font-family: monospace;
+}

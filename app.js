@@ -1,61 +1,79 @@
-//CONOCER EL RESULTADO DEL DESCUENTO COMPRANDO 2 PARES DE ZAPATILLAS///
-let valor1;
-let marca1;
-let marca2;
-let valor2;
-let promocion;
-let i;
+//AGREGAR PRODUCTOS A UN CARRITO, MOSTRAR LA CANTIDAD DEL PRODUCTO SELECCIONADO, LA SUMA DE LA CANTIDAD POR PROUCTO Y LA SUMA DE TODOS
+// LOS PRODUCTOS EN TOTAL DEL CARRITO DE COMPRA///
+const zapatillas = [
+    {nombre: "topper", precio:12500},
+    {nombre: "converse", precio:13900},
+    {nombre: "salomon", precio:28490},
+    {nombre: "ringo", precio:19950},
+];
 
-function suma(a , b) {
-    return a + b ;
-    
+
+let carrito = []
+let selection = prompt("hola desea comprar algunas de nuestras zapatillas si o no")
+
+while(selection != "si" && selection != "no"){
+    alert ("por favor ingresa si o no")
+    selection = prompt("hola desea comprar algo si o no")
 }
-do {
-    marca1 = prompt("¿Cual es la primera zapatillas que eliges? Elige entre topper, converse, salomon y ringo")
-    if (marca1=='topper') {
-        valor1=12500
-    } else {
-        if (marca1=='converse') {
-            valor1=13900
-        } else {
-            if (marca1=='salomon') {
-                valor1=28490
-            } else {
-                if (marca1=='ringo') {
-                    valor1=19950
-                }
-            }
+
+
+if (selection == "si"){
+    alert("a continuacion nuestra lista de calzados, APRETE ENTER")
+    let todaslasZapatillas=zapatillas.map(
+        (zapatilla) => zapatilla.nombre + " " + "$" + zapatilla.precio 
+    );
+    alert(todaslasZapatillas.join(" - "))
+} else if (selection == "no"){
+    alert("gracias por venir, saludos!!!")
+}
+
+
+while(selection != "no"){
+    let zapatilla = prompt("agrega un calzado a tu carrito, ESCRIBIR LA MARCA")
+    let precio = 0
+
+    if (zapatilla == "topper" || zapatilla == "converse" ||  zapatilla == "salomon" ||  zapatilla == "ringo"){
+        switch(zapatilla){
+            case "topper":
+                precio = 12500
+                break;
+             case "converse":
+                precio = 13990
+                break;
+            case "salomon":
+                 precio = 28490
+                 break;
+             case "ringo":
+                precio = 19950
+                break;
+            default:
+                break;
         }
-    }
-    marca2 = prompt("¿Cual es la segunda zapatillas que eliges? Elige entre topper, converse, salomon y ringo")
-    if (marca2=='topper') {
-        valor2=12500
-    } else {
-        if (marca2=='converse') {
-            valor2=13900
-        } else {
-            if (marca2=='salomon') {
-                valor2=28490
-            } else {
-                if (marca2=='ringo') {
-                    valor2=19950
-                }
-            }
-        }
+
+        let unidades = parseInt(prompt("cuantas unidades quiere llevar"))
+
+        carrito.push({zapatilla, unidades , precio})
+        console.log(carrito)
+
+    }else {
+        alert("no tenemos ese producto")
     }
 
-    const resultado = suma(valor1 , valor2);
-    alert("su compra es de ///// " + resultado + "y con su descuento termina pagando = " + ((resultado*30)/100))
-    promocion = prompt("¿Quieres seguir comprando con un descuento del 30%? si para continuar/no para salir")
-    if (promocion != 'no') {
-        i++
-    } else {
-        i=0
+    selection = prompt("desea seguir comprando? SI O NO")
+
+    //SE MOSTRARA CON LA CONSOLA//
+    while(selection === "no"){
+        alert("gracias por la compra, nos vemos!")
+        carrito.forEach((carritoFinal) => {
+            console.log (`zapatilla: ${carritoFinal.zapatilla} , unidades: ${carritoFinal.unidades} , total a pagar por producto ${carritoFinal.unidades * carritoFinal.precio}`)
+        })
+
+    break;
     }
-    
-} while (i!=0);
 
 
+}
 
-
-
+//SE MOSTRARA POR LA CONSOLA EL TOTAL A PAGAR DE TODOS LOS PRODUCTOS JUNTOS//
+const total = carrito.reduce((acc,el) => acc + el.precio * el.unidades , 0)
+console.log(`el total a pagar por su compra es: ${total}`)
